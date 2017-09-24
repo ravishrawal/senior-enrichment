@@ -1,11 +1,19 @@
+import axios from 'axios'
 import { combineReducers } from 'redux'
+import students from './GetStudents'
+import createstudent from './CreateStudent'
+import campuses from './campuses'
 
 const initialState = {}
 
-const rootReducer = function(state = initialState, action) {
-  switch(action.type) {
-    default: return state
-  }
-};
+const rootReducer = combineReducers({
+  students,
+  createstudent,
+  campuses
+})
 
 export default rootReducer
+
+export * from './GetStudents';
+export * from './CreateStudent';
+export * from './campuses';

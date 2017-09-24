@@ -1,25 +1,27 @@
-'use strict'
+'use strict';
 
-const express = require('express')
-const bodyParser = require('body-parser')
-const {resolve} = require('path')
+const express = require('express');
+const bodyParser = require('body-parser');
+const { resolve } = require('path');
 
-const app = express()
+const app = express();
 
 if (process.env.NODE_ENV !== 'production') {
   // Logging middleware (non-production only)
-  app.use(require('volleyball'))
+  app.use(require('volleyball'));
 }
 
 //The code below works because `.use` returns `this` which is `app`. So what we want to return in the `module.exports` is `app`, and we can chain on that declaration because each method invokation returns `app` after mutating based on the middleware functions
 module.exports = app
-  .use(bodyParser.urlencoded({ extended: true }))
+  .use(bodyParser.urlencoded({
+    extended: true
+  }))
   .use(bodyParser.json())
   .use(express.static(resolve(__dirname, '..', 'public'))) // Serve static files from ../public
   .use('/api', require('./api')) // Serve our api
-  .get('/*', (_, res) => res.sendFile(resolve(__dirname, '..', 'public', 'index.html'))) // Send index.html for any other requests.
+  .get('/*', (_, res) => res.sendFile(resolve(__dirname, '..', 'public', 'index.html'))); // Send index.html for any other requests.
 
-  // notice the use of `_` as the first parameter above. This is a pattern for parameters that must exist, but you don't use or reference (or need) in the function body that follows.
+// notice the use of `_` as the first parameter above. This is a pattern for parameters that must exist, but you don't use or reference (or need) in the function body that follows.
 
 if (module === require.main) {
   // Start listening only if we're the main module.
@@ -34,12 +36,41 @@ if (module === require.main) {
           ~ To help compare these objects, reference each of their `id` attributes
   */
 
-  const PORT = 1337
+  const PORT = 1337;
 
-  const db = require('../db')
-  db.sync({force:true})
-  .then(() => {
-    console.log('db synced')
-    app.listen(PORT, () => console.log(`server listening on port ${PORT}`))
-  });
+  const db = require('../db');
+  const Campus = db.models.campus;
+  const Student = db.models.student;
+  db.sync({
+      force: true
+    })
+    .then(() => {
+      console.log('db synced');
+
+      Promise.all([
+          Campus.create({
+            name: 'Luna'
+          }),
+          Campus.create({
+            name: 'Terra'
+          }),
+          Campus.create({
+            name: 'Mars'
+          }),
+          Campus.create({
+            name: 'Titan'
+          })
+        ])
+        .then(([Columbia, NYU]) => {
+          Student.create({
+            name: 'Rav',
+            email: 'rav@columbia.edu'
+          }).then(rav => rav.setCampus(Columbia));
+          Student.create({
+            name: 'OtherRav',
+            email: 'otherrav@columbia.edu'
+          }).then(otherRav => otherRav.setCampus(NYU));
+        })
+        .then(app.listen(PORT, () => console.log(`server listening on port ${PORT}`)));
+    });
 }
