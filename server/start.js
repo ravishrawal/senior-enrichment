@@ -61,7 +61,7 @@ if (module === require.main) {
             name: 'Titan'
           })
         ])
-        .then(([Columbia, NYU]) => {
+        .then(([Columbia, NYU, Mars]) => {
           Student.create({
             name: 'Rav',
             email: 'rav@columbia.edu'
@@ -70,6 +70,10 @@ if (module === require.main) {
             name: 'OtherRav',
             email: 'otherrav@columbia.edu'
           }).then(otherRav => otherRav.setCampus(NYU));
+          Student.create({
+            name: 'Robert',
+            email: 'robert@columbia.edu'
+          }).then(robert => robert.setCampus(Mars));
         })
         .then(app.listen(PORT, () => console.log(`server listening on port ${PORT}`)));
     });

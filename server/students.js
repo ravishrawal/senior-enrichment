@@ -8,7 +8,9 @@ module.exports = router;
 
 
 router.get('/', (req, res, next) => {
-  Student.findAll()
+  Student.findAll({
+    include: [Campus]
+  })
     .then(students => res.send(students));
 });
 

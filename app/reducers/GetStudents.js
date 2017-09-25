@@ -7,11 +7,8 @@ import thunkMiddleware from 'redux-thunk';
 
 //Action Types
 
-const CREATE_STUDENT = 'CREATE_STUDENT';
 const GET_STUDENTS = 'GET_STUDENTS';
 const GET_STUDENT = 'GET_STUDENT';
-const UPDATE_STUDENT = 'UPDATE_STUDENT';
-const DELETE_STUDENT = 'DELETE_STUDENT';
 
 //Action Creators
 
@@ -27,18 +24,6 @@ export function getStudent(student){
 }
 
 //Thunk Creators
-
-export function postStudent(student, history) {
-  return function thunk(dispatch) {
-    axios.post('/api/students', student)
-      .then(res => res.data)
-      .then(newStudent => {
-        const action = getStudent(newStudent);
-        dispatch(action);
-        history.push(`/students/${newStudent.id}`);
-      });
-  };
-}
 
 export function fetchStudents() {
   return function thunk(dispatch) {

@@ -14,6 +14,7 @@ const Student = conn.define('student', {
   email: {
     type: Sequelize.STRING,
     allowNull: false,
+    unique: true,
     validate: {
       isEmail: true,
       notEmpty: true
@@ -25,6 +26,7 @@ const Campus = conn.define('campus', {
   name: {
     type: Sequelize.STRING,
     allowNull: false,
+    unique: true,
     validate: {
       notEmpty: true
     }

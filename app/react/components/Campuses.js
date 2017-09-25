@@ -10,14 +10,14 @@ export function Campuses(props){
       {
         campuses.map((campus) => {
           return (
-            <div className="column">
-              <Link to={`/api/campuses/${campus.id}`} >
+            <div key={campus.id} className="column">
+              <Link to={`/campuses/${campus.id}`} >
                 <div className="ui fluid card" style={{ textAlign: "center" }}>
                   <div className="image" >
                     <img src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/1ccdd322433737.5631e853db4a9.png" style={{ maxWidth:"100%", maxHeight:"100%", width: "60%", margin: "0 auto" }} />
                   </div>
                   <div className="content">
-                    <a className="header">{ campus.name }</a>
+                    <li className="header">{ campus.name }</li>
                   </div>
                 </div>
               </Link>

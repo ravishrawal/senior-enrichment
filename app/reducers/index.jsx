@@ -16,4 +16,6 @@ export default rootReducer
 
 export * from './GetStudents';
 export * from './CreateStudent';
+export * from './DeleteStudent';
+export * from './GetStudent';
 export * from './campuses';
