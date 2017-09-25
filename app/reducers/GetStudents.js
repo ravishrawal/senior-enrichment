@@ -38,7 +38,7 @@ export function fetchStudents() {
 
 //Reducer
 
-export default function reducer(state = [], action) {
+export default function getStudentsReducer(state = [], action) {
   switch(action.type){
     case GET_STUDENTS:
       return action.students;

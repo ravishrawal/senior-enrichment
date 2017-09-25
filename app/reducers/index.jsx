@@ -1,14 +1,14 @@
 import axios from 'axios'
 import { combineReducers } from 'redux'
 import students from './GetStudents'
-import createstudent from './CreateStudent'
-import campuses from './campuses'
+import createStudentReducer from './CreateStudent'
+import campuses from './GetCampuses'
+import deleteStudentReducer from './DeleteStudent'
 
 const initialState = {}
 
 const rootReducer = combineReducers({
   students,
-  createstudent,
   campuses
 })
 
@@ -18,4 +18,4 @@ export * from './GetStudents';
 export * from './CreateStudent';
 export * from './DeleteStudent';
 export * from './GetStudent';
-export * from './campuses';
+export * from './GetCampuses';

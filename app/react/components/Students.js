@@ -8,6 +8,7 @@ import { removeStudent, fetchStudents } from '../../reducers';
 
 export function Students(props){
   const {students} = props;
+  console.log('STUDENTS: ', students);
   return (
     <div>
       <AddStudent />
@@ -33,7 +34,7 @@ export function Students(props){
                     >
                       {student.name}
                   </td>
-                  <td> {student.campus.name} </td>
+                    <td>{student.campus.name}</td>
                   <td
                     onClick={props.handleDeleteClick}
                     className='selectable negative'
@@ -47,6 +48,13 @@ export function Students(props){
         </tbody>
       </table>
     </div>
+  )
+}
+
+function renderCampus(campus){
+  if(campus) return (<td>{campus.name}</td>)
+  return (
+    <td className="selectable warning">Set Campus</td>
   )
 }
 
@@ -66,9 +74,6 @@ function MapDispatchToProps(dispatch){
       dispatch(removeStudentThunk);
       const fetchStudentsThunk = fetchStudents();
       dispatch(fetchStudentsThunk);
-    },
-    handleStudentClick: (evt) => {
-
     }
   }
 }

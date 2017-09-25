@@ -35,7 +35,7 @@ export function fetchCampuses(){
 
 //Reducer
 
-export default function reducer(state = [], action) {
+export default function getCampusesReducer(state = [], action) {
   switch(action.type){
     case GET_CAMPUSES:
       return action.campuses;

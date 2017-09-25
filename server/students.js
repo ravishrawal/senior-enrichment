@@ -20,10 +20,16 @@ router.get('/:id', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
-  Student.create({name: req.body.name, campusId: req.params.campusId})
+  Student.create(req.body)
     .then(student => {
       console.log(`Student ${student.name} Created!`);
       student.save();
+      Student.findById(student.id, {
+        include: [Campus]
+      })
+        .then(student => {
+          console.log('NEW STUDENT: ', student);
+          res.send(student)});
     });
 });
 

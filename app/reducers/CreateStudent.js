@@ -1,6 +1,7 @@
 import axios from 'axios';
 import createLogger from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
+import { getStudent } from './index';
 
 //Initial State
 
@@ -17,12 +18,21 @@ export function createStudent(student){
 
 //Thunk Creators
 
-
+export function postStudent(student, history) {
+  return function thunk(dispatch) {
+    axios.post('/api/students', student)
+      .then(res => res.data)
+      .then(newStudent => {
+        const action = getStudent(newStudent);
+        dispatch(action);
+      });
+  };
+}
 
 
 //Reducer
 
-export default function reducer(state = [], action) {
+export default function createStudentReducer(state = [], action) {
   switch(action.type){
 
     case CREATE_STUDENT:
