@@ -25,8 +25,6 @@ class AddStudent extends Component{
     this.setState(newState);
   }
   handleSubmit(evt){
-    debugger;
-    evt.stopPropagation();
     evt.preventDefault();
     const { nameInputValue, emailInputValue, campusId } = this.state;
     this.props.submitNewStudent({name: nameInputValue, email: emailInputValue, campusId });
@@ -64,13 +62,13 @@ class AddStudent extends Component{
           <div >
             <select name='campusId'
                     onChange={this.handleChange}
-                    className="ui search dropdown"
+                    className="ui dropdown"
                     style={{ width: "97%", margin: "8px 6px" }}
                     >
               <option value="">Campus</option>
               {
                 campuses.map(campus=>{
-                  return (<option value={ campus.id }> { campus.name } </option>)
+                  return (<option key= {campus.id} value={ campus.id }> { campus.name } </option>)
                 })
               }
             </select>

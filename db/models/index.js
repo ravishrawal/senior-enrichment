@@ -19,6 +19,10 @@ const Student = conn.define('student', {
       isEmail: true,
       notEmpty: true
     }
+  },
+  image: {
+    type: Sequelize.STRING,
+    defaultValue: 'https://semantic-ui.com/images/avatar/large/elliot.jpg'
   }
 });
 
