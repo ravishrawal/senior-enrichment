@@ -1,20 +1,39 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { fetchSingleStudent } from '../../reducers';
 
-function SingleStudent(props){
-  console.log('PROPS', props);
-  return (
-    <h2>{props.name}</h2>
-  );
+class SingleStudent extends Component{
+  constructor(props){
+    super(props);
+  }
+  componentDidMount(){
+    const { studentId } = this.props.match.params;
+    this.props.renderStudent(studentId)
+  }
+  render(){
+    return (
+      <div>
+        <h1>{this.props.currentStudent.name}</h1>
+      </div>
+    )
+  }
 }
 
 function MapStateToProps(state){
   console.log('SINGLE STUDENT STATE: ', state);
   return {
-    students: state.students,
     currentStudent: state.currentStudent
   }
 }
 
-export default connect(MapStateToProps)(SingleStudent);
+function MapDispatchToProps(dispatch){
+  return {
+    renderStudent: (studentId)=>{
+      const receiveStudentThunk = fetchSingleStudent(studentId);
+      dispatch(receiveStudentThunk);
+    }
+  }
+}
+
+export default connect(MapStateToProps, MapDispatchToProps)(SingleStudent);

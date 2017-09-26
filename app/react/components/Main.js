@@ -21,10 +21,10 @@ export default class Main extends Component{
       <Router>
         <div>
             <NavBar />
-            <Route exact path='/:studentId' component={SingleStudent}  />
-            <Route exact path='/:campusId' component={SingleCampus}  />
+            <Route exact path='/students/:studentId' component={SingleStudent}  />
+            <Route exact path='/campuses/:campusId' component={SingleCampus}  />
             <Route exact path='/students' component={Students}  />
-            <Route exact path='/campus' component={Campuses}  />
+            <Route exact path='/campuses' component={Campuses}  />
             <Route exact path='/' component={Campuses}  />
         </div>
       </Router>

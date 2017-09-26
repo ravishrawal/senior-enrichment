@@ -65,15 +65,20 @@ function MapStateToProps(state){
   }
 }
 
-function MapDispatchToProps(dispatch){
+function MapDispatchToProps(dispatch, ownProps){
   return {
-    handleDeleteClick: (evt)=> {
-      evt.stopPropagation();
+    handleDeleteClick: (evt) => {
+      evt.preventDefault()
       const studentId = evt.target.attributes.value.value;
       const removeStudentThunk = removeStudent(studentId)
       dispatch(removeStudentThunk);
       const fetchStudentsThunk = fetchStudents();
       dispatch(fetchStudentsThunk);
+    },
+    handleStudentClick: (evt) => {
+      evt.preventDefault();
+      const studentId = evt.target.attributes.value.value;
+      ownProps.history.push(`/students/${studentId}`)
     }
   }
 }

@@ -41,40 +41,14 @@ if (module === require.main) {
   const db = require('../db');
   const Campus = db.models.campus;
   const Student = db.models.student;
+  const seed = require('./seed');
+  
   db.sync({
       force: true
     })
     .then(() => {
       console.log('db synced');
-
-      Promise.all([
-          Campus.create({
-            name: 'Luna'
-          }),
-          Campus.create({
-            name: 'Terra'
-          }),
-          Campus.create({
-            name: 'Mars'
-          }),
-          Campus.create({
-            name: 'Titan'
-          })
-        ])
-        .then(([Columbia, NYU, Mars]) => {
-          Student.create({
-            name: 'Rav',
-            email: 'rav@columbia.edu'
-          }).then(rav => rav.setCampus(Columbia));
-          Student.create({
-            name: 'OtherRav',
-            email: 'otherrav@columbia.edu'
-          }).then(otherRav => otherRav.setCampus(NYU));
-          Student.create({
-            name: 'Robert',
-            email: 'robert@columbia.edu'
-          }).then(robert => robert.setCampus(Mars));
-        })
-        .then(app.listen(PORT, () => console.log(`server listening on port ${PORT}`)));
-    });
+      seed();
+    })
+    .then(app.listen(PORT, () => console.log(`server listening on port ${PORT}`)));
 }

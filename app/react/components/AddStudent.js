@@ -25,6 +25,7 @@ class AddStudent extends Component{
     this.setState(newState);
   }
   handleSubmit(evt){
+    debugger;
     evt.stopPropagation();
     evt.preventDefault();
     const { nameInputValue, emailInputValue, campusId } = this.state;

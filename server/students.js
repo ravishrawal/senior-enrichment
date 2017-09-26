@@ -15,7 +15,9 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/:id', (req, res, next) => {
-  Student.findById(req.params.id)
+  Student.findById(req.params.id, {
+    include: [Campus]
+  })
     .then(student => res.send(student));
 });
 
@@ -29,7 +31,8 @@ router.post('/', (req, res, next) => {
       })
         .then(student => {
           console.log('NEW STUDENT: ', student);
-          res.send(student)});
+          res.send(student);
+        });
     });
 });
 
