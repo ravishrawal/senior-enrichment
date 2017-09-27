@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
 import { fetchStudents, fetchCampuses } from '../../reducers/index.jsx';
 import store from '../../store.jsx';
 import Students from './Students';
@@ -21,11 +21,13 @@ export default class Main extends Component{
       <Router>
         <div>
             <NavBar />
-            <Route exact path='/students/:studentId' component={SingleStudent}  />
-            <Route exact path='/campuses/:campusId' component={SingleCampus}  />
-            <Route exact path='/students' component={Students}  />
-            <Route exact path='/campuses' component={Campuses}  />
-            <Route exact path='/' component={Campuses}  />
+            <Switch>
+              <Route exact path='/students/:studentId' component={SingleStudent}  />
+              <Route exact path='/campuses/:campusId' component={SingleCampus}  />
+              <Route exact path='/students' component={Students}  />
+              <Route exact path='/campuses' component={Campuses}  />
+              <Redirect exact from='/' to='/campuses' />
+            </Switch>
         </div>
       </Router>
     );

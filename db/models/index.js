@@ -37,9 +37,14 @@ const Campus = conn.define('campus', {
   },
   image: {
     type: Sequelize.STRING,
+    defaultValue: "https://mir-s3-cdn-cf.behance.net/project_modules/disp/1ccdd322433737.5631e853db4a9.png",
     validate: {
       isURL: true
     }
+  },
+  address: {
+    type: Sequelize.STRING,
+    defaultValue: 'No Address Specified'
   }
 }, {
   defaultScope: {

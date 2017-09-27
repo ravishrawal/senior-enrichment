@@ -28,7 +28,7 @@ export function fetchSingleStudent(studentId) {
 
 //Reducer
 
-export default function reducer(state={}, action) {
+export default function fetchSingleStudentReducer(state={}, action) {
   switch(action.type){
 
     case RECEIVE_SINGLE_STUDENT:

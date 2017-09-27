@@ -34,7 +34,13 @@ export function Students(props){
                     >
                       {student.name}
                   </td>
-                    <td>{student.campus.name}</td>
+                  <td
+                    value= {student.campus.id}
+                    className='selectable'
+                    onClick={props.handleCampusClick}
+                    >
+                      {student.campus.name}
+                  </td>
                   <td
                     onClick={props.handleDeleteClick}
                     className='selectable negative'
@@ -48,13 +54,6 @@ export function Students(props){
         </tbody>
       </table>
     </div>
-  )
-}
-
-function renderCampus(campus){
-  if(campus) return (<td>{campus.name}</td>)
-  return (
-    <td className="selectable warning">Set Campus</td>
   )
 }
 
@@ -79,6 +78,11 @@ function MapDispatchToProps(dispatch, ownProps){
       evt.preventDefault();
       const studentId = evt.target.attributes.value.value;
       ownProps.history.push(`/students/${studentId}`)
+    },
+    handleCampusClick: (evt) => {
+      evt.preventDefault();
+      const campusId = evt.target.attributes.value.value;
+      ownProps.history.push(`/campuses/${campusId}`)
     }
   }
 }

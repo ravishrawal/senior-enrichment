@@ -14,9 +14,13 @@ export function Campuses(props){
               <Link to={`/campuses/${campus.id}`} >
                 <div className="ui fluid card" style={{ textAlign: "center" }}>
                   <div className="image" >
-                    <img src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/1ccdd322433737.5631e853db4a9.png" style={{ maxWidth:"100%", maxHeight:"100%", width: "60%", margin: "0 auto" }} />
+                    <img src={campus.image} style={{ maxWidth:"100%", maxHeight:"100%", width: "60%", margin: "0 auto" }} />
                   </div>
                   <div className="content">
+                    <i
+                      className="right floated delete icon"
+                      onClick={props.handleDeleteClick}
+                      style={{ fontSize:"1.5em", color:"crimson" }}></i>
                     <li className="header">{ campus.name }</li>
                   </div>
                 </div>
@@ -37,7 +41,11 @@ function MapStateToProps(state){
 }
 
 function MapDispatchToProps(dispatch){
-
+  return {
+    handleDeleteClick: {
+      
+    }
+  }
 }
 
 export default connect(MapStateToProps, MapDispatchToProps)(Campuses);

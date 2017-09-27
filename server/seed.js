@@ -5,16 +5,20 @@ const Student = db.models.student;
 module.exports = function seed(){
   return Promise.all([
       Campus.create({
-        name: 'Luna'
+        name: 'Luna',
+        address: '340 ET Boulevard, GalaxyFarAway 10128'
       }),
       Campus.create({
-        name: 'Terra'
+        name: 'Terra',
+        address: '1356 Krombopulus Michael Street, Glipglop 90210'
       }),
       Campus.create({
-        name: 'Mars'
+        name: 'Mars',
+        address: '202 Nebula Lane, Jacksonville 20301'
       }),
       Campus.create({
-        name: 'Titan'
+        name: 'Titan',
+        address: '1045 Intergalatic Void Road, BigVoid 20234'
       })
     ])
     .then(([Luna, Terra, Mars, Titan]) => {
