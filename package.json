@@ -10,6 +10,9 @@
     "start": "node server/start.js",
     "test:dev": "nodemon node_modules/mocha/bin/mocha"
   },
+  "engines": {
+    "node": "8.0.0"
+  },
   "keywords": [
     "react",
     "redux",
