@@ -10,12 +10,14 @@ const UPDATE_STUDENT_INFO = 'UPDATE_STUDENT_INFO';
 
 export function updateStudent(student){
   const action = { type:UPDATE_STUDENT_INFO, student};
+  return action;
 }
 
 //Thunk Creators
 
 export function updateStudentInfo(student, studentId) {
   return function thunk(dispatch){
+    debugger
     axios.put(`/api/students/${studentId}`, student)
       .then(res => res.data)
       .then(student => {
@@ -30,6 +32,7 @@ export function updateStudentInfo(student, studentId) {
 export default function updateStudentReducer(state={}, action){
   switch(action.type){
     case UPDATE_STUDENT_INFO:
+    debugger
       return state.students.filter((student) => {
         return student.id !== action.student.id;
       }).concat(action.student);

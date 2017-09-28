@@ -24,14 +24,14 @@ router.post('/', (req, res, next) => {
 
 router.put('/:id', (req, res, next) => {
   Campus.update(req.body, {
-    where: { id: req.body.id }
+    where: { id: req.params.id }
   })
-    .then(campus => console.log(campus));
+    .then(campus => res.send(campus));
 });
 
 router.delete('/:id', (req, res, next) => {
   Campus.destroy({
     where: { id: req.params.id }
   })
-    .then(campus => res.json);
+    .then(campus => res.send(campus));
 });

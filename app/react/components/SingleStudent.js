@@ -41,7 +41,6 @@ class SingleStudent extends Component{
     evt.preventDefault();
     const { studentId } = this.props.match.params;
     const { campusId } = this.state;
-    debugger
     this.props.submitUpdatedStudent({ campusId }, studentId);
   }
   render(){
@@ -180,7 +179,6 @@ function MapDispatchToProps(dispatch){
   return {
     getStudentInfo: (studentId) => {
       const receiveStudentThunk = fetchSingleStudent(studentId);
-      debugger
       dispatch(receiveStudentThunk);
     },
     submitUpdatedStudent: (student, studentId) => {

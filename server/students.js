@@ -25,13 +25,11 @@ router.get('/:id', (req, res, next) => {
 router.post('/', (req, res, next) => {
   Student.create(req.body)
     .then(student => {
-      console.log(`Student ${student.name} Created!`);
       student.save();
       Student.findById(student.id, {
         include: [Campus]
       })
         .then(student => {
-          console.log('NEW STUDENT: ', student);
           res.send(student);
         });
     });
@@ -41,7 +39,12 @@ router.put('/:id', (req, res, next) => {
   Student.update(req.body, {
     where: { id: req.params.id }
   })
-    .then(student => console.log(student));
+    .then(( )=> {
+      Student.findById(req.params.id, {
+        include: [Campus]
+      })
+        .then(student => res.send(student));
+    });
 });
 
 router.delete('/:id', (req, res, next) => {

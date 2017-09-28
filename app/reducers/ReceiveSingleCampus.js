@@ -30,7 +30,6 @@ export function fetchSingleCampus(campusId) {
 
 export default function fetchSingleCampusReducer(state={}, action) {
   switch (action.type) {
-
     case RECEIVE_SINGLE_CAMPUS:
       return Object.assign({}, state, action.campus);
 

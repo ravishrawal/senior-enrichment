@@ -34,13 +34,11 @@ export function Students(props){
                     >
                       {student.name}
                   </td>
-                  <td
-                    value= {student.campus ? student.campus.id : 'no campus'}
-                    className='selectable'
-                    onClick={props.handleCampusClick}
-                    >
-                      {student.campus ? student.campus.name : 'Not Assigned'}
-                  </td>
+                      {student.campus ? <td
+                        value= {student.campus ? student.campus.id : 'no campus'}
+                        className='selectable'
+                        onClick={props.handleCampusClick}
+                        >{student.campus.name}</td> : <td>Not Assigned</td>}
                   <td
                     onClick={props.handleDeleteClick}
                     className='selectable negative'
