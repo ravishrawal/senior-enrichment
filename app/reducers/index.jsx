@@ -7,6 +7,7 @@ import deleteStudentReducer from './DeleteStudent';
 import currentStudent from './ReceiveSingleStudent';
 import updateStudent from './UpdateStudent';
 import currentCampus from './ReceiveSingleCampus';
+import deleteCampus from './DeleteCampus';
 
 
 const rootReducer = combineReducers({
@@ -20,8 +21,9 @@ export default rootReducer
 
 export * from './GetStudents';
 export * from './CreateStudent';
-export * from './DeleteStudent';
-export * from './GetCampuses';
-export * from './ReceiveSingleStudent';
 export * from './UpdateStudent';
+export * from './DeleteStudent';
+export * from './ReceiveSingleStudent';
+export * from './GetCampuses';
 export * from './ReceiveSingleCampus';
+export * from './DeleteCampus';

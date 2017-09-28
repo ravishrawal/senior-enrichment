@@ -24,7 +24,7 @@ router.post('/', (req, res, next) => {
 
 router.put('/:id', (req, res, next) => {
   Campus.update(req.body, {
-    where: { id: req.params.id }
+    where: { id: req.body.id }
   })
     .then(campus => console.log(campus));
 });

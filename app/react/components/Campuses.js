@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
+import { fetchCampuses, removeCampus, fetchStudents } from '../../reducers';
 
 export function Campuses(props){
   const {campuses} = props;
-  console.log('CAMPUSES: ', campuses);
   return (
     <div className="ui two column grid" style={{ width: "90vw", margin: "auto" }}>
       {
@@ -20,6 +20,7 @@ export function Campuses(props){
                     <i
                       className="right floated delete icon"
                       onClick={props.handleDeleteClick}
+                      value={campus.id}
                       style={{ fontSize:"1.5em", color:"crimson" }}></i>
                     <li className="header">{ campus.name }</li>
                   </div>
@@ -34,7 +35,6 @@ export function Campuses(props){
 }
 
 function MapStateToProps(state){
-  console.log('STATE: ', state);
   return {
     campuses: state.campuses
   }
@@ -42,8 +42,15 @@ function MapStateToProps(state){
 
 function MapDispatchToProps(dispatch){
   return {
-    handleDeleteClick: {
-      
+    handleDeleteClick: (evt) => {
+      evt.preventDefault();
+      const campusId = evt.target.attributes.value.value;
+      const removeCampusThunk = removeCampus(campusId);
+      dispatch(removeCampusThunk);
+      const fetchCampusesThunk = fetchCampuses();
+      dispatch(fetchCampusesThunk);
+      const fetchStudentsThunk = fetchStudents();
+      dispatch(fetchStudentsThunk);
     }
   }
 }

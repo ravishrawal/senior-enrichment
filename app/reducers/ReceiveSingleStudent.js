@@ -16,6 +16,7 @@ export function receiveSingleStudent(student){
 //Thunk Creators
 
 export function fetchSingleStudent(studentId) {
+  debugger
   return function thunk(dispatch) {
     axios.get(`/api/students/${studentId}`)
       .then(res => res.data)
@@ -30,7 +31,6 @@ export function fetchSingleStudent(studentId) {
 
 export default function fetchSingleStudentReducer(state={}, action) {
   switch(action.type){
-
     case RECEIVE_SINGLE_STUDENT:
     return Object.assign({}, state, action.student);
 

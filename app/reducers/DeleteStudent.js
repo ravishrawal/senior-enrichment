@@ -31,7 +31,6 @@ export function removeStudent(studentId){
 export default function deleteStudentReducer(state=[], action) {
   switch(action.type){
     case DELETE_STUDENT:
-      console.log('delete stet: ', state);
       return state.students.filter((student) => {
         return student.id !== action.student.id;
       });

@@ -22,7 +22,10 @@ const Student = conn.define('student', {
   },
   image: {
     type: Sequelize.STRING,
-    defaultValue: 'https://semantic-ui.com/images/avatar/large/elliot.jpg'
+    defaultValue: 'https://semantic-ui.com/images/avatar/large/elliot.jpg',
+    validate: {
+      isURL: true
+    }
   }
 });
 

@@ -2,8 +2,6 @@ import axios from 'axios';
 import createLogger from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
 
-//Initial State
-
 
 //Action Types
 
@@ -26,7 +24,6 @@ export function fetchCampuses(){
     axios.get('/api/campuses')
       .then(res => res.data)
       .then(campuses => {
-        console.log('Campuses: ', campuses);
         const action = getCampuses(campuses);
         dispatch(action);
       });

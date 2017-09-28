@@ -35,11 +35,11 @@ export function Students(props){
                       {student.name}
                   </td>
                   <td
-                    value= {student.campus.id}
+                    value= {student.campus ? student.campus.id : 'no campus'}
                     className='selectable'
                     onClick={props.handleCampusClick}
                     >
-                      {student.campus.name}
+                      {student.campus ? student.campus.name : 'Not Assigned'}
                   </td>
                   <td
                     onClick={props.handleDeleteClick}

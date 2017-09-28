@@ -15,7 +15,6 @@ export function updateStudent(student){
 //Thunk Creators
 
 export function updateStudentInfo(student, studentId) {
-
   return function thunk(dispatch){
     axios.put(`/api/students/${studentId}`, student)
       .then(res => res.data)
@@ -31,9 +30,11 @@ export function updateStudentInfo(student, studentId) {
 export default function updateStudentReducer(state={}, action){
   switch(action.type){
     case UPDATE_STUDENT_INFO:
-      return Object.assign({}, state, action.student);
+      return state.students.filter((student) => {
+        return student.id !== action.student.id;
+      }).concat(action.student);
 
     default:
-      return state
+      return state;
   }
 }

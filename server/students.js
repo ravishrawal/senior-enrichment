@@ -37,7 +37,6 @@ router.post('/', (req, res, next) => {
 });
 
 router.put('/:id', (req, res, next) => {
-  console.log('REQ.BODY: ', req.body, req.params);
   Student.update(req.body, {
     where: { id: req.params.id }
   })

@@ -16,6 +16,8 @@ class SingleStudent extends Component{
     this.toggleEditMode = this.toggleEditMode.bind(this);
     this.changeHandler = this.changeHandler.bind(this);
     this.submitHandler = this.submitHandler.bind(this);
+    this.submitCampusHandler = this.submitCampusHandler.bind(this);
+    this.renderCampusSelect = this.renderCampusSelect.bind(this);
   }
   componentDidMount() {
     const { studentId } = this.props.match.params;
@@ -26,6 +28,7 @@ class SingleStudent extends Component{
     const newState = {};
     newState[evt.target.name] = evt.target.value;
     this.setState(newState);
+    debugger
   }
   submitHandler(evt) {
     evt.preventDefault();
@@ -34,6 +37,13 @@ class SingleStudent extends Component{
     this.props.submitUpdatedStudent({name, email, campusId, image }, studentId);
     this.setState({ isClicked: false });
   }
+  submitCampusHandler(evt) {
+    evt.preventDefault();
+    const { studentId } = this.props.match.params;
+    const { campusId } = this.state;
+    debugger
+    this.props.submitUpdatedStudent({ campusId }, studentId);
+  }
   render(){
     const { currentStudent, toggleEditMode } = this.props;
     const { isClicked } = this.state;
@@ -41,6 +51,23 @@ class SingleStudent extends Component{
       <div>
         { this.toggleEditMode(isClicked, currentStudent) }
       </div>
+    )
+  }
+  renderCampusSelect(){
+    const { campuses } = this.props;
+    return (
+      <select name='campusId'
+              onChange={this.changeHandler}
+              className="ui dropdown"
+              style={{ width: "15.5%", margin: "auto", position: "relative" }}
+              >
+        <option value="">Campus</option>
+        {
+          campuses.map(campus=>{
+            return (<option key= {campus.id} value={ campus.id }> { campus.name } </option>)
+          })
+        }
+      </select>
     )
   }
   toggleEditMode (isClicked, student) {
@@ -63,8 +90,16 @@ class SingleStudent extends Component{
               </button>
             </div>
             <h3>Email: { email }</h3>
-            { campus &&
-              <h3><Link to={`/campuses/${campus.id}`}>Campus: { campus.name }</Link></h3>
+            { campus ? <h3><Link to={`/campuses/${campus.id}`}>Campus: { campus.name }</Link></h3> :
+                       <form onSubmit={this.submitCampusHandler}>
+                         <h3>{this.renderCampusSelect()}</h3>
+                           <button
+                             type='submit'
+                             className="ui icon button"
+                             style={{ display:"inline", position:"absolute", margin:"auto 13px" }}>
+                             <i className="checkmark icon"></i>
+                           </button>
+                        </form>
             }
           </div>
         </div>
