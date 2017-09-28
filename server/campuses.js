@@ -10,15 +10,15 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/:id', (req, res, next) => {
-  Campus.findById(+req.params.id)
+  Campus.findById(req.params.id)
     .then(campus => res.send(campus));
 });
 
 router.post('/', (req, res, next) => {
   Campus.create(req.body)
     .then(campus=>{
-      console.log(`Campus ${campus.name} Created!`);
-      campus.save();
+      campus.save()
+      .then(campus => res.send(campus));
     });
 });
 

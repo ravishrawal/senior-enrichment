@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
-import { fetchCampuses, removeCampus, fetchStudents } from '../../reducers';
+import { fetchCampuses, removeCampus, fetchStudents, postCampus } from '../../reducers';
+import AddCampus from './AddCampus';
 
 export function Campuses(props){
   const {campuses} = props;
@@ -30,6 +31,7 @@ export function Campuses(props){
           )
         })
       }
+      <AddCampus />
     </div>
   )
 }

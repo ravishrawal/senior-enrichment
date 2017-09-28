@@ -21,7 +21,7 @@ class SingleStudent extends Component{
   }
   componentDidMount() {
     const { studentId } = this.props.match.params;
-    this.props.getStudentInfo(studentId)
+    this.props.getStudentInfo(studentId);
   }
   changeHandler(evt) {
     evt.preventDefault()
@@ -180,6 +180,7 @@ function MapDispatchToProps(dispatch){
   return {
     getStudentInfo: (studentId) => {
       const receiveStudentThunk = fetchSingleStudent(studentId);
+      debugger
       dispatch(receiveStudentThunk);
     },
     submitUpdatedStudent: (student, studentId) => {

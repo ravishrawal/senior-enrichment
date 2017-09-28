@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { fetchStudents, postStudent } from '../../reducers';
+import { fetchCampuses, postCampus, getCampus } from '../../reducers';
 
-class AddStudent extends Component{
+class AddCampus extends Component{
   constructor(props){
     super(props);
     this.state={
       nameInputValue: '',
-      emailInputValue: '',
-      campusId: '',
+      addressInputValue: '',
       iconClicked: false
     };
     this.handleChange = this.handleChange.bind(this);
@@ -23,11 +22,12 @@ class AddStudent extends Component{
     const newState = {};
     newState[evt.target.name] = evt.target.value;
     this.setState(newState);
+    console.log(this.state);
   }
   handleSubmit(evt){
     evt.preventDefault();
-    const { nameInputValue, emailInputValue, campusId } = this.state;
-    this.props.submitNewStudent({name: nameInputValue, email: emailInputValue, campusId });
+    const { nameInputValue, addressInputValue } = this.state;
+    this.props.submitNewCampus({name: nameInputValue, address: addressInputValue });
     this.setState({ iconClicked: false });
   }
   handleIconClick(evt){
@@ -39,7 +39,7 @@ class AddStudent extends Component{
       return null
     }
     return (
-      <div className="ui icon buttons">
+      <div className="ui icon buttons" style={{ width:"100%" }}>
         <button className='ui button' onClick={this.handleIconClick}><i className="plus icon"></i></button>
       </div>
     )
@@ -51,28 +51,14 @@ class AddStudent extends Component{
     }
     return (
       <form onSubmit={this.handleSubmit}>
-        <div>
-          <div className="ui input focus" style={{ margin:'auto 5px' }}>
+        <div style={{ textAlign:"center", width:"100%" }}>
+          <div className="ui input focus" style={{ margin:'10px 5px', width:"36%" }}>
             <input onChange={this.handleChange} name='nameInputValue' placeholder='name'></input>
           </div>
-          <div className="ui input focus" style={{ margin:'auto 5px' }}>
-            <input onChange={this.handleChange} name='emailInputValue' placeholder='email'></input>
+          <div className="ui input focus" style={{ margin:'10px 5px', width:"59%" }}>
+            <input onChange={this.handleChange} name='addressInputValue' placeholder='address'></input>
           </div>
-          <div >
-            <select name='campusId'
-                    onChange={this.handleChange}
-                    className="ui dropdown"
-                    style={{ width: "97%", margin: "8px 6px" }}
-                    >
-              <option value="">Campus</option>
-              {
-                campuses.map(campus=>{
-                  return (<option key= {campus.id} value={ campus.id }> { campus.name } </option>)
-                })
-              }
-            </select>
-          </div>
-          <div className="ui icon buttons" style={{ margin: "auto 5px", float: "right", width: "97%"}}>
+          <div className="ui icon buttons" style={{ margin: "auto 5px", width: "97%"}}>
             <button type='submit' className='ui button'><i className="plus icon"></i></button>
           </div>
         </div>
@@ -83,7 +69,7 @@ class AddStudent extends Component{
     const { iconClicked } = this.state;
     const { campuses }= this.props;
     return (
-      <div style={{float:'right', margin:'10px 20px'}}>
+      <div className="column" style={{ textAlign:"center" }}>
         { this.renderIcon(iconClicked) }
         { this.renderForm(iconClicked, campuses) }
       </div>
@@ -97,11 +83,11 @@ function mapStateToProps({campuses}) {
 
 function mapDispatchToProps(dispatch, ownProps){
   return {
-    submitNewStudent: (student) => {
-      const newStudentThunk = postStudent(student, ownProps.history)
-      dispatch(newStudentThunk);
+    submitNewCampus: (campus) => {
+      const newCampusThunk = postCampus(campus, ownProps.history)
+      dispatch(newCampusThunk);
     }
   }
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AddStudent));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AddCampus));

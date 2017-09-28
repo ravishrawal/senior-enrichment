@@ -5,15 +5,19 @@ import thunkMiddleware from 'redux-thunk';
 
 //Action Types
 
-const CREATE_CAMPUS = 'CREATE_CAMPUS';
 const GET_CAMPUSES = 'GET_CAMPUSES';
-const UPDATE_CAMPUS = 'UPDATE_CAMPUS';
-const DELETE_CAMPUS = 'DELETE_CAMPUS';
+const GET_CAMPUS = 'GET_CAMPUS';
+
 
 //Action Creators
 
 export function getCampuses(campuses){
   const action = { type: GET_CAMPUSES, campuses };
+  return action;
+}
+
+export function getCampus(campus){
+  const action = { type: GET_CAMPUS, campus };
   return action;
 }
 
@@ -36,6 +40,9 @@ export default function getCampusesReducer(state = [], action) {
   switch(action.type){
     case GET_CAMPUSES:
       return action.campuses;
+
+    case GET_CAMPUS:
+      return [...state, action.campus]; 
 
     default:
       return state;

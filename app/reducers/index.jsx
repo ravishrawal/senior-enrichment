@@ -7,6 +7,7 @@ import deleteStudentReducer from './DeleteStudent';
 import currentStudent from './ReceiveSingleStudent';
 import updateStudent from './UpdateStudent';
 import currentCampus from './ReceiveSingleCampus';
+import createCampusReducer from './CreateCampus';
 import deleteCampus from './DeleteCampus';
 
 
@@ -26,4 +27,5 @@ export * from './DeleteStudent';
 export * from './ReceiveSingleStudent';
 export * from './GetCampuses';
 export * from './ReceiveSingleCampus';
+export * from './CreateCampus';
 export * from './DeleteCampus';

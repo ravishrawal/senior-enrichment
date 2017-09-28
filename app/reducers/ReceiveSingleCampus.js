@@ -16,15 +16,13 @@ export function receiveSingleCampus(campus) {
 //Thunk Creators
 
 export function fetchSingleCampus(campusId) {
-  debugger;
   return function thunk(dispatch) {
     axios.get(`/api/campuses/${campusId}`)
       .then(res => res.data)
       .then(campus => {
         const action = receiveSingleCampus(campus);
-        console.log('CAMPUS: ', campus);
         dispatch(action);
-      });
+      })
   };
 }
 
@@ -32,9 +30,8 @@ export function fetchSingleCampus(campusId) {
 
 export default function fetchSingleCampusReducer(state={}, action) {
   switch (action.type) {
-    
+
     case RECEIVE_SINGLE_CAMPUS:
-    debugger;
       return Object.assign({}, state, action.campus);
 
     default:

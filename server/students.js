@@ -18,7 +18,8 @@ router.get('/:id', (req, res, next) => {
   Student.findById(req.params.id, {
     include: [Campus]
   })
-    .then(student => res.send(student));
+    .then(student => res.send(student))
+    .catch((err) => res.send(err));
 });
 
 router.post('/', (req, res, next) => {
